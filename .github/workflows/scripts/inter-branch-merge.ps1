@@ -119,7 +119,7 @@ try {
 
     Write-Host -f Magenta "${HeadBranch}:`t$(& git log --format=$formatString -1 HEAD)"
 
-    [string[]] $commitsToMerge = & git rev-list "$BaseBranch..$HeadBranch" # find all commits which will be merged
+    [string[]] $commitsToMerge = & git rev-list --right-only "$BaseBranch..$HeadBranch" # find all commits which will be merged
 
     if (-not $commitsToMerge) {
         Write-Warning "There were no commits to be merged from $HeadBranch into $BaseBranch"
