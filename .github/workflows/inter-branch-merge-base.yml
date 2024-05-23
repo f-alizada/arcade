@@ -1,0 +1,30 @@
+on:
+  workflow_call:
+    inputs:      
+      repository_name:
+        type: string
+        required: true
+      repository_owner:
+        type: string
+        default: 'f-alizada'
+      base_branch:
+        type: string
+        required: true
+      head_branch:
+        type: string
+        required: true
+      
+jobs:
+  run-merge:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    env: 
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - run: .\.github\workflows\scripts\inter-branch-merge.ps1 -RepoName ${{ inputs.repository_name }} -RepoOwner ${{ inputs.repository_owner }} -HeadBranch ${{ inputs.head_branch }} -BaseBranch ${{ inputs.base_branch }}
