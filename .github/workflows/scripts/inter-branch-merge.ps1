@@ -68,7 +68,7 @@ function Invoke-Block([scriptblock]$cmd) {
 function GetCommitterGitHubName($sha) {
     $email = & git show -s --format='%ce' $sha
     $key = 'committer'
-
+    Write-Host "Email: $email"
     if ($email -eq '@dotnet-maestro') {
         return 'dotnet-maestro'
     }
@@ -76,19 +76,22 @@ function GetCommitterGitHubName($sha) {
     # Exclude noreply@github.com - these map to https://github.com/web-flow, which is the user account
     # added as the 'committer' when users commit via the GitHub web UI on their own PRs
     if ((-not $email) -or ($email -eq 'noreply@github.com')) {
+        Write-Host "change key to author"
         $key = 'author'
         $email = & git show -s --format='%ae' $sha
     }
 
     if ($email -like '*@users.noreply.github.com') {
+        Write-Host "no-reply detected"
         [string[]] $userNames = ($email -replace '@users.noreply.github.com', '') -split '\+'
         return $userNames | select -last 1
     }
     elseif ($script:emails[$email]) {
+        Write-Host "stored information"
         return $script:emails[$email]
     }
     else {
-        Write-Verbose "Attempting to find GitHub username for $email"
+        Write-Host "Attempting to find GitHub username for $email"
         try {
             $resp = Invoke-RestMethod -Method GET -Headers $headers `
                 "https://api.github.com/repos/$RepoOwner/$RepoName/commits/$sha"
