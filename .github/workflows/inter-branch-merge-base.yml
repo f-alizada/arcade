@@ -29,12 +29,15 @@ jobs:
         with:
           repository: ${{ github.repository }}
           path: repository
+          fetch-depth: 0
       - uses: actions/checkout@v4
         name: Checkout arcade repository
         with:
-          fetch-depth: 0
           repository: f-alizada/arcade
           path: arcade-repository
+
+      - name: Print GitHub context
+        run: echo ${{ toJson(github) }}
       
       - run: ${{ github.workspace }}\arcade-repository\.github\workflows\scripts\inter-branch-merge.ps1  -RepoName ${{ inputs.repository_name }} -RepoOwner ${{ inputs.repository_owner }} -HeadBranch ${{ inputs.head_branch }} -BaseBranch ${{ inputs.base_branch }}
         name: Merge branches
