@@ -36,6 +36,6 @@ jobs:
           repository: f-alizada/arcade
           path: arcade-repository
       
-      - run: ${GITHUB_WORKSPACE}\arcade-repository\.github\workflows\scripts\inter-branch-merge.ps1  -RepoName ${{ inputs.repository_name }} -RepoOwner ${{ inputs.repository_owner }} -HeadBranch ${{ inputs.head_branch }} -BaseBranch ${{ inputs.base_branch }}
+      - run: ${{ github.workspace }}\arcade-repository\.github\workflows\scripts\inter-branch-merge.ps1  -RepoName ${{ inputs.repository_name }} -RepoOwner ${{ inputs.repository_owner }} -HeadBranch ${{ inputs.head_branch }} -BaseBranch ${{ inputs.base_branch }}
         name: Merge branches
-        working-directory: ${GITHUB_WORKSPACE}/repository
+        working-directory: ${{ github.workspace }}/repository
