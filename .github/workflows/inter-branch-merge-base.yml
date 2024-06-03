@@ -27,8 +27,7 @@ jobs:
       - uses: actions/checkout@v4
         name: Checkout repository
         with:
-          fetch-depth: 0
-          repository: {{ github.repository }}
+          repository: ${{ github.repository }}
           path: repository
       - uses: actions/checkout@v4
         name: Checkout arcade repository
