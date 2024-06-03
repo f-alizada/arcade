@@ -24,17 +24,18 @@ jobs:
     env: 
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v4
-        name: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           repository: ${{ github.repository }}
           path: repository
           fetch-depth: 0
-      - uses: actions/checkout@v4
-        name: Checkout arcade repository
+      - name: Checkout arcade repository
+        uses: actions/checkout@v4
         with:
           repository: f-alizada/arcade
           path: arcade-repository
+          ref: release/8.0
 
       - name: Print GitHub context
         run: echo ${{ github.workspace }}
