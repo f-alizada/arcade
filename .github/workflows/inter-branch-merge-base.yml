@@ -41,11 +41,11 @@ jobs:
         id: fetch-repo-name
         run: |
           echo "Repository owner: ${{ github.repository_owner }}"
-          echo "Repository name: ${{ github.reository }}"
+          echo "Repository name: ${{ github.repository }}"
           $repoName = "${{ github.repository }}"
           $repoNameWithoutOwner = $repoName.Substring("${{ github.repository_owner }}".Length + 1)
           echo $repoNameWithoutOwner
-          echo "repository_name=$repoNameWithoutOwner" >> "$GITHUB_OUTPUT"
+          echo "repository_name=$repoNameWithoutOwner" >> $GITHUB_OUTPUT
       
       - run: ${{ github.workspace }}\arcade-repository\.github\workflows\scripts\inter-branch-merge.ps1  -RepoName ${{ steps.fetch-repo-name.outputs.repository_name }} -RepoOwner ${{ github.repository_owner }} -HeadBranch ${{ inputs.head_branch }} -BaseBranch ${{ inputs.base_branch }}
         name: Merge branches
