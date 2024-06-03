@@ -1,4 +1,4 @@
-name: POC Inter-branch merge
+name: Inter-branch merge
 on: 
   push:
     branches:
@@ -12,6 +12,5 @@ jobs:
   check-script:
     uses: f-alizada/arcade/.github/workflows/inter-branch-merge-base.yml@release/8.0
     with:
-      repository_name: 'arcade'
       base_branch: 'main'
       head_branch: 'release/8.0'
