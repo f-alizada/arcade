@@ -41,7 +41,7 @@ jobs:
         run: |
           echo "Repository owner: ${{ github.repository_owner }}"
           echo "Repository name: ${{ github.reository }}"
-          $repoName = "Fetch only repo name: ${{ github.repository }}"
+          $repoName = "${{ github.repository }}"
           $repoNameWithoutOwner = $repoName.Substring("${{ github.repository_owner }}".Length + 1)
           echo $repoNameWithoutOwner
       
