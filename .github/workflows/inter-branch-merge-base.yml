@@ -25,6 +25,18 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
+        name: Checkout repository
         with:
           fetch-depth: 0
-      - run: .\.github\workflows\scripts\inter-branch-merge.ps1 -RepoName ${{ inputs.repository_name }} -RepoOwner ${{ inputs.repository_owner }} -HeadBranch ${{ inputs.head_branch }} -BaseBranch ${{ inputs.base_branch }}
+          repository: {{ github.repository }}
+          path: repository
+      - uses: actions/checkout@v4
+        name: Checkout arcade repository
+        with:
+          fetch-depth: 0
+          repository: f-alizada/arcade
+          path: arcade-repository
+      
+      - run: ${GITHUB_WORKSPACE}\arcade-repository\.github\workflows\scripts\inter-branch-merge.ps1  -RepoName ${{ inputs.repository_name }} -RepoOwner ${{ inputs.repository_owner }} -HeadBranch ${{ inputs.head_branch }} -BaseBranch ${{ inputs.base_branch }}
+        name: Merge branches
+        working-directory: ${GITHUB_WORKSPACE}/repository
