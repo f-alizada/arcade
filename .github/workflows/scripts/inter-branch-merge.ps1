@@ -92,10 +92,11 @@ function GetCommitterGitHubName($sha) {
     }
     else {
         Write-Host "Attempting to find GitHub username for $email"
+        Write-Host "key used '$key'"
         try {
             $resp = Invoke-RestMethod -Method GET -Headers $headers `
                 "https://api.github.com/repos/$RepoOwner/$RepoName/commits/$sha"
-            $resp | Write-Verbose
+            $resp | Write-Host
 
             $script:emails[$email] = $resp.$key.login
             return $resp.$key.login
