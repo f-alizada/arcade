@@ -48,13 +48,13 @@ jobs:
           echo ${{ inputs.allowAutomatedCommits }}
           echo ${{ inputs.quietComments }}
 
-          if (${{ inputs.allowAutomatedCommits }} -eq 'true') {
+          if ('${{ inputs.allowAutomatedCommits }}' -eq 'true') {
             $mergeSwitchArguments = "-AllowAutomatedCommits"
           }else{
             echo "allow automated commits is not allowed"
           }
 
-          if (${{ inputs.quietComments }} -eq 'true') {
+          if ('${{ inputs.quietComments }}' -eq 'true') {
             $mergeSwitchArguments = $mergeSwitchArguments + " -QuietComments"
           }else{
             echo "QuietComments is not allowed"
