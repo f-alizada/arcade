@@ -35,8 +35,8 @@ jobs:
           path: arcade-repository 
           ref: release/8.0 # will be replaced with main
 
-      - name: Print GitHub event
-        run: echo ${{ toJSON(github.event) }}
+      - name: Print GitHub workflow ref
+        run: echo "${{ toJSON(github.workflow_ref) }}"
 
       - name: Print GitHub ref name
         run: echo $env:GITHUB_REF_NAME
