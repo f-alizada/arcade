@@ -33,6 +33,9 @@ jobs:
       - name: Print GitHub repo
         run: echo ${{ github.repository }}
 
+      - name: Print GitHub ref name
+        run: echo $GITHUB_REF_NAME
+
       - name: Fetch repository name
         id: fetch-repo-name
         run: |
