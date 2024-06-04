@@ -44,12 +44,17 @@ jobs:
       - name: Switch parameters setting
         run: | 
           $mergeSwitchArguments = ""
+          
           if (${{ inputs.allowAutomatedCommits }}) {
             $mergeSwitchArguments = "-AllowAutomatedCommits"
+          }else{
+            echo "allow automated commits is not allowed"
           }
 
           if (${{ inputs.quietComments }}) {
             $mergeSwitchArguments = $mergeSwitchArguments + " -QuietComments"
+          }else{
+            echo "QuietComments is not allowed"
           }
 
           echo $mergeSwitchArguments
