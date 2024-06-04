@@ -12,4 +12,3 @@ jobs:
     uses: f-alizada/arcade/.github/workflows/inter-branch-merge-base.yml@release/8.0
     with:
       base_branch: 'main'
-      head_branch: 'release/8.0'

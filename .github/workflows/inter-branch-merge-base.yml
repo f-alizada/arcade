@@ -4,9 +4,6 @@ on:
       base_branch:
         type: string
         required: true
-      head_branch:
-        type: string
-        required: true
       
 jobs:
   run-merge:
