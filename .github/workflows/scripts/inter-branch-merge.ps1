@@ -32,7 +32,11 @@ param(
 
     [Alias('h')]
     [Parameter(Mandatory = $true)]
-    $HeadBranch
+    $HeadBranch,
+
+    [switch]$AllowAutomatedCommits,
+
+    [switch]$QuietComments
 )
 
 $ErrorActionPreference = 'stop'
@@ -40,8 +44,6 @@ Set-StrictMode -Version 1
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 $stringTokken = $Env:GH_TOKEN
-$QuietComments = $true
-$AllowAutomatedCommits = $false
 
 $headers = @{
     Authorization = "bearer $stringTokken"

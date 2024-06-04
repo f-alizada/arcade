@@ -2,7 +2,7 @@ name: Inter-branch merge
 on: 
   push:
     branches:
-      - release/8.0
+      - release/6.0
 permissions:
   contents: write
   pull-requests: write
