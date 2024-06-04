@@ -45,6 +45,9 @@ jobs:
         run: | 
           $mergeSwitchArguments = ""
           
+          echo ${{ inputs.allowAutomatedCommits }}
+          echo ${{ inputs.quietComments }}
+
           if (${{ inputs.allowAutomatedCommits }}) {
             $mergeSwitchArguments = "-AllowAutomatedCommits"
           }else{
