@@ -39,7 +39,7 @@ jobs:
     env: 
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Checkout repository
+      - name: Checkout caller repository
         uses: actions/checkout@v4
         with:
           repository: ${{ github.repository }}
@@ -50,13 +50,7 @@ jobs:
         with:
           repository: f-alizada/arcade # will be replaced with dotnet: dotnet/arcade
           path: arcade-repository 
-          ref: ${{ inputs.script_version }} # will be replaced with main
-
-      - name: Print GitHub workflow ref
-        run: echo "${{ toJSON(github.workflow_ref) }}"
-
-      - name: Print GitHub ref name
-        run: echo $env:GITHUB_REF_NAME
+          ref: ${{ inputs.script_version }}
 
       - name: Switch parameters setting
         id: switch-parameters
@@ -80,8 +74,6 @@ jobs:
       - name: Fetch repository name
         id: fetch-repo-name
         run: |
-          echo "Repository owner: ${{ github.repository_owner }}"
-          echo "Repository name: ${{ github.repository }}"
           $repoName = "${{ github.repository }}"
           $repoNameWithoutOwner = $repoName.Substring("${{ github.repository_owner }}".Length + 1)
           "repository_name=$repoNameWithoutOwner" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
