@@ -16,18 +16,22 @@ on:
     inputs:      
       base_branch:
         type: string
+        description: The branch to merge changes into
         required: true
       allowAutomatedCommits:
         type: boolean
+        description: To allow the commits made by the dotnet-maestro[bot]. Applied only when all changes in current branch made by bot. Default is false.
         required: false
         default: false
       quietComments:
         type: boolean
         required: false
+        description: Do not tag commiters, do not comment on PR updates. Reduces GitHub notifications
         default: true
       script_version:
         type: string
         required: false
+        description: The ref of the workflow file to use. Default is 'main', specify when the referencing workflow is not 'main' 
         default: 'main'
 
 jobs:
