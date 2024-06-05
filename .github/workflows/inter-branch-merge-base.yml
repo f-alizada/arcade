@@ -38,7 +38,7 @@ jobs:
   run-merge:
     runs-on: windows-latest
     permissions:
-      contents: write
+      contents: read
       pull-requests: write
     env: 
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
