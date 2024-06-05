@@ -1,3 +1,16 @@
+# This is a workflow file that will be used to merge branches in the repository.
+# Permissions required: 
+#   Content 
+#     write
+#   Pull requests 
+#     write
+
+# Event data: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_call received is equal to the caller event data. 
+# In order to understand which version of script needs to be used parameter script version introduced, which should be equal to the ref of referenced workflow file.
+# More information on the script_version:
+#   https://github.com/orgs/community/discussions/18601
+#   https://github.com/orgs/community/discussions/63863
+
 on:
   workflow_call:
     inputs:      
@@ -12,6 +25,10 @@ on:
         type: boolean
         required: false
         default: true
+      script_version:
+        type: string
+        required: false
+        default: 'main'
 
 jobs:
   run-merge:
@@ -33,7 +50,7 @@ jobs:
         with:
           repository: f-alizada/arcade # will be replaced with dotnet: dotnet/arcade
           path: arcade-repository 
-          ref: release/8.0 # will be replaced with main
+          ref: ${{ inputs.script_version }} # will be replaced with main
 
       - name: Print GitHub workflow ref
         run: echo "${{ toJSON(github.workflow_ref) }}"
