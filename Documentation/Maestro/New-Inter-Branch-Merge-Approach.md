@@ -7,7 +7,7 @@ Inter branch merge is mechanism to create automated PRs to upstream branches whe
 Example of the PR: https://github.com/dotnet/sdk/pull/41440
 
 Current flow of creating the PR is based on Web-Hooks.
-Repository in order to onboard to use inter-merge automated flow had to add the object in subscritions list of [subscriptions file](https://github.com/dotnet/versions/blob/616bf3daa90677d8315954f6477f9c78045e0f0f/Maestro/subscriptions.json):
+Repository, in order to onboard to use inter-merge automated flow, had to add the object in subscritions list of [subscriptions file](https://github.com/dotnet/versions/blob/616bf3daa90677d8315954f6477f9c78045e0f0f/Maestro/subscriptions.json):
 
 ```JSON
 {
@@ -61,7 +61,7 @@ The process of creating the PR once the workflow triggered:
 
 - Workflow will read the configuration file from the source-repository/configuration_file_branch/configuration_file_path
   - If the configuration for triggered branch does not exist, the workflow will stop
-- Having that the configuration is presented, the PR will be created into the configured branch 
+- Having that the configuration is presented and all branches are presented, the PR will be created into the configured branch 
 
 
 ## Onboarding
@@ -114,10 +114,10 @@ jobs:
 ```
 
 Once the PR with the workflow will be merged into the specified branches:
-1 - The workflow will fetch the configuration from the config-file
 
-
-
+- The workflow will fetch the configuration from the config-file
+- Will check the validity of the configuration
+- Will create the merge PR from source-to-target-branch (given that both are presented)
 
 ## Creating releases with new flow
 
@@ -125,11 +125,10 @@ Once the onboarding is completed, and there is a need to configure new flow the 
 - Update the configuration file configuration_file_path
 - Create the needed branch 
 
-The order of steps below does not affect the outcome. 
+Note: The order of steps above does not affect the outcome. 
+
 
 Example: 
-
-
 Existing configuration file of merge flow:
 ```JS
 {
