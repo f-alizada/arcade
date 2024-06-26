@@ -38,6 +38,9 @@ jobs:
       contents: write
       pull-requests: write
     steps:  
+      - name: Check the longpath
+        run: |
+          (Get-ItemProperty "HKLM:System\CurrentControlSet\Control\FileSystem").LongPathsEnabled
       - name: Enable git longpath
         run: git config --global core.longpaths true
       - name: Checkout caller repository
