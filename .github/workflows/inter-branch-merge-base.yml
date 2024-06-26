@@ -39,7 +39,7 @@ jobs:
       pull-requests: write
     steps:  
       - name: Enable git longpath
-        run: git config --global core.longpaths true
+        run: git config core.longpaths true
       - name: Checkout caller repository
         uses: actions/checkout@v4
         with:
